@@ -1,15 +1,75 @@
-Source: template-repository
-Section: unknown
+Source: golang-google-cloud
+Maintainer: Debian Go Packaging Team <team+pkg-go@tracker.debian.org>
+Uploaders: Martín Ferrari <tincho@debian.org>,
+           Michael Stapelberg <stapelberg@debian.org>,
+           Tim Potter <tpot@hpe.com>,
+           Anthony Fok <foka@debian.org>,
+Section: golang
+Testsuite: autopkgtest-pkg-go
 Priority: optional
-Maintainer: Tsic404 <liuheng@deepin.org>
-Build-Depends: debhelper (>= 11)
-Standards-Version: 4.1.3
-Homepage: https://github.com/deepin-community/template-repository
-#Vcs-Browser: https://salsa.debian.org/debian/deepin-community-template-repository
-#Vcs-Git: https://salsa.debian.org/debian/deepin-community-template-repository.git
+Build-Depends: debhelper-compat (= 13),
+               dh-golang (>= 1.31~),
+               golang-any,
+               golang-github-golang-mock-dev (>= 1.3.1~),
+               golang-github-google-btree-dev,
+               golang-github-google-go-cmp-dev (>= 0.3.0~),
+               golang-github-google-martian-dev,
+               golang-github-google-pprof-dev,
+               golang-github-googleapis-gax-go-dev (>= 2.0.5~),
+               golang-go.opencensus-dev (>= 0.22.0~),
+               golang-golang-x-net-dev,
+               golang-golang-x-oauth2-google-dev,
+               golang-golang-x-time-dev,
+               golang-google-api-dev (>= 0.21.0~),
+               golang-google-genproto-dev (>= 0.0~git20200413.b5235f6~),
+               golang-google-grpc-dev (>= 1.21.1~),
+               golang-github-golang-protobuf-1-3-dev,
+               golang-rsc-binaryregexp-dev,
+Standards-Version: 4.6.2
+Vcs-Browser: https://salsa.debian.org/go-team/packages/golang-google-cloud
+Vcs-Git: https://salsa.debian.org/go-team/packages/golang-google-cloud.git
+Homepage: https://cloud.google.com/go/home
+Rules-Requires-Root: no
+XS-Go-Import-Path: cloud.google.com/go
 
-Package: template-repository
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Package: golang-google-cloud-dev
+Architecture: all
+Multi-Arch: foreign
+Depends: golang-github-golang-mock-dev (>= 1.3.1~),
+         golang-github-google-btree-dev,
+         golang-github-google-go-cmp-dev (>= 0.3.0~),
+         golang-github-google-martian-dev,
+         golang-github-google-pprof-dev,
+         golang-github-googleapis-gax-go-dev (>= 2.0.4~),
+         golang-go.opencensus-dev (>= 0.22.0~),
+         golang-golang-x-net-dev,
+         golang-golang-x-oauth2-google-dev,
+         golang-golang-x-time-dev,
+         golang-google-api-dev (>= 0.21.0~),
+         golang-google-cloud-compute-metadata-dev (= ${source:Version}),
+         golang-google-genproto-dev (>= 0.0~git20200413.b5235f6~),
+         golang-google-grpc-dev (>= 1.21.1~),
+         golang-github-golang-protobuf-1-3-dev | golang-github-golang-protobuf-1-5-dev,
+         golang-rsc-binaryregexp-dev,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Google Cloud Platform APIs
+ Package cloud contains Google Cloud Platform APIs related types and common
+ functions.
+ .
+ Provides both the old google.golang.org/cloud and the new cloud.google.com/go
+ trees.
+
+Package: golang-google-cloud-compute-metadata-dev
+Architecture: all
+Multi-Arch: foreign
+Depends: golang-golang-x-net-dev,
+         ${misc:Depends},
+         ${shlibs:Depends},
+Description: Google Cloud Platform APIs (only cloud/compute/metadata)
+ This package contains only google.golang.org/cloud/compute/metadata, which is
+ required by other packages (such as golang-golang-x-oauth2-dev), hence useful
+ to split out to break circular dependencies.
+ .
+ Provides both the old google.golang.org/cloud and the new cloud.google.com/go
+ trees.
