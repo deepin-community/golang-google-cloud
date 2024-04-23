@@ -1,0 +1,46 @@
+From: Shengjing Zhu <zhsj@debian.org>
+Date: Wed, 15 Apr 2020 04:00:20 +0800
+Subject: skip tests which need network access
+
+---
+ spanner/client_test.go  | 1 +
+ storage/bucket_test.go  | 1 +
+ storage/storage_test.go | 1 +
+ 3 files changed, 3 insertions(+)
+
+diff --git a/spanner/client_test.go b/spanner/client_test.go
+index bb5d42c..837412d 100644
+--- a/spanner/client_test.go
++++ b/spanner/client_test.go
+@@ -1732,6 +1732,7 @@ func TestClient_WithGRPCConnectionPoolAndNumChannels(t *testing.T) {
+ }
+ 
+ func TestClient_WithGRPCConnectionPoolAndNumChannels_Misconfigured(t *testing.T) {
++	t.Skip("Need network access")
+ 	t.Parallel()
+ 
+ 	// Deliberately misconfigure NumChannels and ConnPool.
+diff --git a/storage/bucket_test.go b/storage/bucket_test.go
+index b4ebca1..74c418f 100644
+--- a/storage/bucket_test.go
++++ b/storage/bucket_test.go
+@@ -414,6 +414,7 @@ func TestBucketAttrsToUpdateToRawBucket(t *testing.T) {
+ }
+ 
+ func TestCallBuilders(t *testing.T) {
++	t.Skip("Need network access")
+ 	rc, err := raw.NewService(context.Background())
+ 	if err != nil {
+ 		t.Fatal(err)
+diff --git a/storage/storage_test.go b/storage/storage_test.go
+index 2bf13c6..e3be773 100644
+--- a/storage/storage_test.go
++++ b/storage/storage_test.go
+@@ -1188,6 +1188,7 @@ func TestAttrToFieldMapCoverage(t *testing.T) {
+ // Create a client using a custom endpoint, and verify that raw.BasePath (used
+ // for writes) and readHost (used for reads) are both set correctly.
+ func TestWithEndpoint(t *testing.T) {
++	t.Skip("Need network access")
+ 	ctx := context.Background()
+ 	endpoint := "https://fake.gcs.com:8080/storage/v1"
+ 	c, err := NewClient(ctx, option.WithEndpoint(endpoint))

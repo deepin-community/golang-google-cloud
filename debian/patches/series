@@ -1,0 +1,2 @@
+0001-skip-tests-which-need-network-access.patch
+0002-Backport-testEqual-in-spanner-package.patch
