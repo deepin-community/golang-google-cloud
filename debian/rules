@@ -1,4 +1,26 @@
 #!/usr/bin/make -f
 
+# pubsub/internal/longtest has "no non-test Go files" error and is thus excluded
+export DH_GOLANG_EXCLUDES := \
+	cmd busybench benchwrapper \
+	pubsub/internal/longtest \
+	internal/gapicgen
+export DH_GOLANG_INSTALL_EXTRA := storage/internal/test
+
 %:
-	dh $@
+	dh $@ --buildsystem=golang --with=golang --builddir=_build
+
+
+override_dh_auto_test:
+	dh_auto_test -- -short
+
+IPATH := cloud.google.com/go
+PKG1 := golang-google-cloud-dev
+PKG2 := golang-google-cloud-compute-metadata-dev
+PREFIX := usr/share/gocode/src
+
+override_dh_install:
+	dh_install
+	# Move compute/metadata files into separate package.
+	mkdir -vp debian/$(PKG2)/$(PREFIX)/$(IPATH)/
+	mv -v debian/$(PKG1)/$(PREFIX)/$(IPATH)/compute/ debian/$(PKG2)/$(PREFIX)/$(IPATH)
