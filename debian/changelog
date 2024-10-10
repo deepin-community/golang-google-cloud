@@ -1,3 +1,22 @@
+golang-google-cloud (0.56.0-5) unstable; urgency=medium
+
+  * Team upload
+  * Upload to unstable
+
+ -- Reinhard Tartler <siretart@tauware.de>  Fri, 26 Jul 2024 06:59:23 +0200
+
+golang-google-cloud (0.56.0-4) experimental; urgency=medium
+
+  * Team upload
+  * Compile against grpc 1.64, closes: #1074133
+    Disabled a bunch of packages that no longer build with the newer grpcproto:
+    - asset/v1beta
+    - cloudbuild/apiv1
+    - spanner
+    - expr/apiv1alpha1
+
+ -- Reinhard Tartler <siretart@tauware.de>  Fri, 28 Jun 2024 17:53:49 -0400
+
 golang-google-cloud (0.56.0-3) unstable; urgency=medium
 
   * Team upload
