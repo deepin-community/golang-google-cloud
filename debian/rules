@@ -2,6 +2,10 @@
 
 # pubsub/internal/longtest has "no non-test Go files" error and is thus excluded
 export DH_GOLANG_EXCLUDES := \
+	asset/v1beta1 asset/apiv1beta1 \
+	cloudbuild/apiv1 \
+	spanner \
+	expr/apiv1alpha1 \
 	cmd busybench benchwrapper \
 	pubsub/internal/longtest \
 	internal/gapicgen
